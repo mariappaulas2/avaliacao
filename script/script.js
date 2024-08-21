@@ -20,4 +20,3 @@ form.addEventListener('submit', function(event) {
 
 //funções
 //crud - create delete read update
-
