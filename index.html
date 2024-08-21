@@ -6,7 +6,7 @@
     <title>Document</title>
     <script src="script/script.js" defer></script>
     <link rel="stylesheet" href="css/style.css">
-    <script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container">
@@ -26,45 +26,78 @@
                         <option value="baixa-op">baixa</option>
                     </select>
 
-                    <input type="submit" value="Enviar">
+                    <!--adicona-->
+                    <button onclick=""><i class='bx bx-chevron-right' ></i></button>
                 </form>
             </div>
-
-            <!-- parte 2 do formulario  -->
-            <div class="formularioPT2">
-
-            </div>
-
-            <!-- parte 3 do formulario aonde colocamos a parte de pesquisa e visualização das tarefas  -->
+            <br>
+            <!-- parte 2 do formulario aonde colocamos a parte de pesquisa e visualização das tarefas  -->
             <div class="formularioFerramentas">
-
-                <!-- parte sobre pesquisas  -->
-                <div class="search">
-                    
-                    <input type="text" id="search" placeholder="Pesquisar...">
-                    <button onclick="searchFunction()">Pesquisar</button>
                 
+                <div class="PesquisaFiltros">
+                    <!-- parte sobre pesquisas  -->
+                    <div class="search">
+                                
+                        <input type="text" id="search" placeholder="Pesquisar...">
+                        <button onclick="searchFunction()">Pesquisar</button>
+                            
+                    </div>
+        
+                        <!-- parte sobre filtros -->
+                    <div class="filtro">
+                        <h4>Filtrar</h4>
+                        <!-- select das opções de prioridade  -->
+                        <select id="filtrar-prioridade">
+                            <option value="urgente-op">urgente</option>
+                            <option value="normal-op">normal</option>
+                            <option value="baixa-op">baixa</option>
+                        </select>
+                    </div>
                 </div>
-
-                <!-- parte sobre filtros -->
-                <div class="filtro">
-                    <!-- select das opções de prioridade  -->
-                    <select id="filtrar-prioridade">
-                        <option value="urgente-op">urgente</option>
-                        <option value="normal-op">normal</option>
-                        <option value="baixa-op">baixa</option>
-                    </select>
-                </div>
-                
+                <br>
                 <!-- itens -->
                 <div class="lista-todo">
                     <!-- listas -->
                     <div class="todo">
-                        <h3>fazendo algo</h3>
+                        <h3>Fazendo algo</h3>
+
+                        <!-- local aonde irá a prioridade-->
+                        <div class="prioridade"></div>
                         <!-- botões  -->
-                        <button class="finish-todo"></button>
-                        <button class="edit-todo"></button>
-                        <button class="delete-todo"></button>
+                        <div class="botoes">
+                            <button class="finish-todo">
+                                <i class='bx bx-check'></i>
+                            </button>
+                            <button class="edit-todo">
+                                <i class='bx bxs-pencil'></i>
+                            </button>
+                            <button class="delete-todo">
+                                <i class='bx bxs-trash-alt' ></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- listas -->
+                    <div class="todo">
+                        <h3>Fazendo algo</h3>
+                        <!-- botões  -->
+                        <div class="prioridade">
+                            <i class='bx bx-circle bx-circle-fill prioridade-urgente'></i>
+                            <i class='bx bx-circle bx-circle-fill prioridade-normal'></i>
+                            <i class='bx bx-circle bx-circle-fill prioridade-baixa'></i>
+                            <!--<i class='bx bxs-circle'></i> circulo porem preennchido-->
+                        </div>
+                        <div class="botoes">
+                            <button class="finish-todo">
+                                <i class='bx bx-check'></i>
+                            </button>
+                            <button class="edit-todo">
+                                <i class='bx bxs-pencil'></i>
+                            </button>
+                            <button class="delete-todo">
+
+                                <i class='bx bxs-trash-alt' ></i>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

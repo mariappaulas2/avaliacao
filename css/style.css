@@ -1,0 +1,112 @@
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body
+{
+    background-color: #333;
+    
+}
+.card
+{
+    background-color: #fff;
+    border-radius: 10px;
+    width: 35%;
+    margin: 20px auto;
+    padding: 20px; 
+}
+.formularioPT1
+{
+    display: flex;
+}
+
+form
+{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.formularioFerramentas
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.search
+{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filtro
+{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.PesquisaFiltros
+{
+    display: flex;
+    justify-content: space-between;
+    
+}
+.todo
+{
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    background-color: #4e5257;
+    border-radius: 20px;
+    margin: 10px;
+    padding: 5px;
+    padding-left: 15px;
+}
+
+.botoes
+{
+    display: flex;
+    gap: 10px;
+    
+}
+
+.lista-todo
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #242633;
+    border-radius: 10px;
+
+}
+button
+{
+    background-color: #ffff;
+    color: #242633;
+    border: 1px solid #242633;
+    border-radius: 10px;
+    padding: 0.3rem 0.6rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+button:hover
+{
+    background-color: #333;
+    color:hsl(0, 0%, 100%);
+}
+.button:hover > bxs-trash-alt
+{
+    color:hsl(0, 100%, 50%);
+}
+
