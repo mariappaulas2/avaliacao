@@ -16,14 +16,16 @@
 
             <!-- parte 1 do formulario  -->
             <div class="formularioPT1">
-                <form id = "storage">
                 
-                    <input type="text" id="name" name="name">
+                <h2>tarefas</h2>
+                <form id = "storage">
+                    
+                    <input type="text" id="name" name="name" placeholder="escreva aqui o qual será a tarefa...">
 
                     <select id="select-prioridade">
-                        <option value="urgente-op">urgente</option>
-                        <option value="normal-op">normal</option>
-                        <option value="baixa-op">baixa</option>
+                        <option value="urgente-op">Urgente</option>
+                        <option value="normal-op">Normal</option>
+                        <option value="baixa-op">Baixa</option>
                     </select>
 
                     <!--adicona-->
@@ -48,9 +50,9 @@
                         <h4>Filtrar</h4>
                         <!-- select das opções de prioridade  -->
                         <select id="filtrar-prioridade">
-                            <option value="urgente-op">urgente</option>
-                            <option value="normal-op">normal</option>
-                            <option value="baixa-op">baixa</option>
+                            <option value="urgente-op">Urgente</option>
+                            <option value="normal-op">Normal</option>
+                            <option value="baixa-op">Baixa</option>
                         </select>
                     </div>
                 </div>
@@ -80,13 +82,9 @@
                     <!-- listas -->
                     <div class="todo">
                         <h3>Fazendo algo</h3>
-                        <!-- botões  -->
-                        <div class="prioridade">
-                            <i class='bx bx-circle bx-circle-fill prioridade-urgente'></i>
-                            <i class='bx bx-circle bx-circle-fill prioridade-normal'></i>
-                            <i class='bx bx-circle bx-circle-fill prioridade-baixa'></i>
-                            <!--<i class='bx bxs-circle'></i> circulo porem preennchido-->
-                        </div>
+                        <!-- local aonde irá a prioridade-->
+                        <div class="prioridade"></div>
+                        <!-- botões -->
                         <div class="botoes">
                             <button class="finish-todo">
                                 <i class='bx bx-check'></i>

@@ -1,32 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
 *
 {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+    font-family: "Inria Sans", sans-serif;
 }
 body
 {
     background-color: #333;
-    
 }
+
+.container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #242633;
+}
+
 .card
 {
     background-color: #fff;
     border-radius: 10px;
-    width: 35%;
+    width: 30%;
     margin: 20px auto;
     padding: 20px; 
 }
+
 .formularioPT1
 {
     display: flex;
+    flex-direction: column;
 }
 
-form
+.formularioPT1 h3
+{
+    margin-left: 50px;
+}
+
+#storage
 {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    width: 100%;
+    justify-content: center;
+}
+
+#name
+{
+    width: 68%;
+    height: 25px;
+    padding: 2px;
+    padding-left: 5px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+#select-prioridade
+{
+    height: 25px;
+    width: 17%;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid #333;
 }
 
 .formularioFerramentas
@@ -35,11 +75,28 @@ form
     flex-direction: column;
 }
 
+
+.PesquisaFiltros
+{
+    display: flex;
+    justify-content: space-between;
+    margin: 5px;
+    margin-top: 20px;
+}
 .search
 {
     display: flex;
     gap: 10px;
     align-items: center;
+}
+
+#search
+{
+    height: 25px;
+    border-radius: 10px;
+    border: 1px solid #333;
+    padding: 2px;
+    padding-left: 5px;
 }
 
 .filtro
@@ -49,12 +106,14 @@ form
     align-items: center;
 }
 
-.PesquisaFiltros
+#filtrar-prioridade
 {
-    display: flex;
-    justify-content: space-between;
-    
+    height: 25px;
+    padding: 2px;
+    border-radius: 10px;
+    border: 1px solid #333;
 }
+
 .todo
 {
     color: #fff;
@@ -86,6 +145,7 @@ form
     border-radius: 10px;
 
 }
+
 button
 {
     background-color: #ffff;
@@ -100,13 +160,31 @@ button
     
 }
 
+.bx
+{
+    padding-top: 2px;
+}
+
 button:hover
 {
     background-color: #333;
     color:hsl(0, 0%, 100%);
 }
-.button:hover > bxs-trash-alt
+
+.finish-todo:hover,
+.prioridade-baixa:hover
+{
+    color: hsl(115, 100%, 50%);
+}
+
+.edit-todo:hover,
+.prioridade-normal:hover
+{
+    color: hsl(61, 100%, 50%);
+}
+
+.delete-todo:hover,
+.prioridade-urgente:hover
 {
     color:hsl(0, 100%, 50%);
 }
-
