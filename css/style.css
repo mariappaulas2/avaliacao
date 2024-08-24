@@ -19,7 +19,7 @@ body
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #333;
+    color: #242633;
 }
 
 .card
@@ -31,11 +31,9 @@ body
     padding: 20px;
     
 }
-
 .formularioPT1
 {
     display: flex;
-    flex-direction: column;
 }
 
 .formularioPT1 h3
@@ -115,7 +113,6 @@ body
     border-radius: 10px;
     border: 1px solid #423a66;
 }
-
 .todo
 {
     color: #fff;
@@ -190,3 +187,4 @@ button:hover
 {
     color:hsl(0, 100%, 50%);
 }
+
