@@ -42,7 +42,12 @@ body
     margin-left: 50px;
 }
 
-#storage
+
+.hide {
+    display: none;
+}
+
+#storage, #editStorage
 {
     display: flex;
     flex-direction: row;
@@ -51,7 +56,7 @@ body
     justify-content: center;
 }
 
-#name
+#storageInput, #editInput
 {
     width: 68%;
     height: 25px;
@@ -84,6 +89,7 @@ body
     margin: 5px;
     margin-top: 20px;
 }
+
 .search
 {
     display: flex;
@@ -130,6 +136,16 @@ body
     border: 1px solid #423a66;
 }
 
+.done
+{
+    background: #242633;
+}
+
+.done h3
+{
+    text-decoration: line-through;
+}
+
 .botoes
 {
     display: flex;
@@ -158,7 +174,7 @@ button
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    transition: 0.2s;
 }
 
 .bx
@@ -184,8 +200,3 @@ button:hover
 {
     color:hsl(0, 100%, 50%);
 }
-.delete-todo:hover
-{
-    color:hsl(0, 100%, 50%);
-}
-

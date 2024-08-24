@@ -18,7 +18,7 @@
             <div class="formularioPT1">
                 
                 <form id = "storage">
-                    <input type="text" id="name" name="name" placeholder="Escreva aqui o qual será a tarefa...">
+                    <input type="text" id="storageInput" name="name" placeholder="Escreva aqui qual será a tarefa...">
 
                     <select id="select-prioridade">
                         <option value="urgente-op">Urgente</option>
@@ -27,8 +27,27 @@
                     </select>
 
                     <!--adicona-->
-                    <button onclick="" ><i class='bx bx-chevron-right' ></i></button>
+                    <button type="submit"><i class='bx bx-chevron-right' ></i></button>
                 </form>
+
+                <!-- editar tarefa -->
+                <div class="hide">
+                    <form id = "editStorage">
+                        <input type="text" id="editInput" name="edit">
+    
+                        <select id="select-prioridade">
+                            <option value="urgente-op">Urgente</option>
+                            <option value="normal-op">Normal</option>
+                            <option value="baixa-op">Baixa</option>
+                        </select>
+    
+                        <!--adicona edicao-->
+                        <button type="submit"><i class='bx bx-check'></i></button>
+    
+                        <!--cancela edição-->
+                        <button type="submit" id="cancelEdit"><i class='bx bxs-eraser'></i></button>
+                    </form>
+                </div>
             </div>
             <br>
             <!-- parte 2 do formulario aonde colocamos a parte de pesquisa e visualização das tarefas  -->
@@ -41,7 +60,6 @@
                         <h4>Pesquisar</h4>
                         <input type="text" id="search" placeholder="Pesquisar...">
                         <button onclick="" id="deleteSearch"><i class='bx bxs-eraser'></i></button>
-                        
                     </div>
         
                         <!-- parte sobre filtros -->
@@ -52,6 +70,7 @@
                             <option value="urgente-op">Urgente</option>
                             <option value="normal-op">Normal</option>
                             <option value="baixa-op">Baixa</option>
+                            <option value="done-op">Prontos</option>
                         </select>
                     </div>
                 </div>
@@ -78,7 +97,7 @@
                         
                     </div>
                     <!-- listas -->
-                    <div class="todo">
+                    <div class="todo done">
                         <h3>Fazendo algo</h3>
                         <!-- local aonde irá a prioridade-->
                         <div class="prioridade"></div>
