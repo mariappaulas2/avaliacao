@@ -9,7 +9,8 @@
 }
 body
 {
-    background-color: #333;
+    background: rgb(36,15,128);
+    background: radial-gradient(circle, rgba(36,15,128,1) 0%, rgba(7,1,15,1) 62%);
 }
 
 .container
@@ -18,16 +19,17 @@ body
     justify-content: center;
     align-items: center;
     height: 100vh;
-    color: #242633;
+    color: #333;
 }
 
 .card
 {
-    background-color: #fff;
+    background-color: #ffffff;
     border-radius: 10px;
     width: 30%;
     margin: 20px auto;
-    padding: 20px; 
+    padding: 20px;
+    
 }
 
 .formularioPT1
@@ -57,7 +59,7 @@ body
     padding: 2px;
     padding-left: 5px;
     border-radius: 10px;
-    border: 1px solid #333;
+    border: 1px solid #423a66;
 }
 
 #select-prioridade
@@ -66,7 +68,7 @@ body
     width: 17%;
     padding: 2px;
     border-radius: 10px;
-    border: 1px solid #333;
+    border: 1px solid #423a66;
 }
 
 .formularioFerramentas
@@ -94,7 +96,7 @@ body
 {
     height: 25px;
     border-radius: 10px;
-    border: 1px solid #333;
+    border: 1px solid #423a66;
     padding: 2px;
     padding-left: 5px;
 }
@@ -111,7 +113,7 @@ body
     height: 25px;
     padding: 2px;
     border-radius: 10px;
-    border: 1px solid #333;
+    border: 1px solid #423a66;
 }
 
 .todo
@@ -122,11 +124,12 @@ body
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    background-color: #4e5257;
+    background-color: #4e4770;
     border-radius: 20px;
     margin: 10px;
     padding: 5px;
     padding-left: 15px;
+    border: 1px solid #423a66;
 }
 
 .botoes
@@ -141,7 +144,7 @@ body
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #242633;
+    background-color: #beb0d1;
     border-radius: 10px;
 
 }
@@ -149,8 +152,8 @@ body
 button
 {
     background-color: #ffff;
-    color: #242633;
-    border: 1px solid #242633;
+    color: #423a66;
+    border: 1px solid #423a66;
     border-radius: 10px;
     padding: 0.3rem 0.6rem;
     cursor: pointer;
@@ -167,24 +170,23 @@ button
 
 button:hover
 {
-    background-color: #333;
+    background-color: #423a66;
     color:hsl(0, 0%, 100%);
 }
 
-.finish-todo:hover,
-.prioridade-baixa:hover
+.finish-todo:hover
 {
     color: hsl(115, 100%, 50%);
 }
-
-.edit-todo:hover,
-.prioridade-normal:hover
+.edit-todo:hover
 {
     color: hsl(61, 100%, 50%);
 }
-
-.delete-todo:hover,
-.prioridade-urgente:hover
+.delete-todo:hover
+{
+    color:hsl(0, 100%, 50%);
+}
+.delete-todo:hover
 {
     color:hsl(0, 100%, 50%);
 }
