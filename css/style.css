@@ -120,6 +120,7 @@ body
     border-radius: 10px;
     border: 1px solid #423a66;
 }
+
 .todo
 {
     color: #fff;
@@ -155,8 +156,6 @@ body
 
 .lista-todo
 {
-    display: flex;
-    flex-direction: column;
     gap: 10px;
     background-color: #beb0d1;
     border-radius: 10px;
@@ -175,6 +174,10 @@ button
     justify-content: center;
     align-items: center;
     transition: 0.2s;
+}
+
+i {
+    pointer-events: none;
 }
 
 .bx

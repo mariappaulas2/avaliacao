@@ -17,23 +17,9 @@
             <!-- parte 1 do formulario  -->
             <div class="formularioPT1">
                 
-                <form id = "storage">
-                    <input type="text" id="storageInput" name="name" placeholder="Escreva aqui qual será a tarefa...">
-
-                    <select id="select-prioridade">
-                        <option value="urgente-op">Urgente</option>
-                        <option value="normal-op">Normal</option>
-                        <option value="baixa-op">Baixa</option>
-                    </select>
-
-                    <!--adicona-->
-                    <button type="submit"><i class='bx bx-chevron-right' ></i></button>
-                </form>
-
-                <!-- editar tarefa -->
-                <div class="hide">
-                    <form id = "editStorage">
-                        <input type="text" id="editInput" name="edit">
+                <div class="storage">
+                    <form id = "storage">
+                        <input type="text" id="storageInput" name="name" placeholder="Escreva aqui qual será a tarefa...">
     
                         <select id="select-prioridade">
                             <option value="urgente-op">Urgente</option>
@@ -41,9 +27,26 @@
                             <option value="baixa-op">Baixa</option>
                         </select>
     
+                        <!--adicona-->
+                        <button type="submit"><i class='bx bx-chevron-right' ></i></button>
+                    </form>
+                </div>
+
+                <!-- editar tarefa -->
+                <div class="editStorage hide">
+                    <h4>Editar Tarefa</h4>
+                    <form id = "editStorage">
+                        <input type="text" id="editInput" name="edit">
+                        
+                        <select id="select-prioridade">
+                            <option value="urgente-op">Urgente</option>
+                            <option value="normal-op">Normal</option>
+                            <option value="baixa-op">Baixa</option>
+                        </select>
+                        
                         <!--adicona edicao-->
                         <button type="submit"><i class='bx bx-check'></i></button>
-    
+                        
                         <!--cancela edição-->
                         <button type="submit" id="cancelEdit"><i class='bx bxs-eraser'></i></button>
                     </form>
@@ -76,7 +79,7 @@
                 </div>
                 <!-- itens -->
                 <div class="lista-todo">
-                    <!-- listas -->
+                    <!-- exemplo de lista -->
                     <div class="todo">
                         <h3>Fazendo algo</h3>
 
@@ -96,7 +99,8 @@
                         </div>
                         
                     </div>
-                    <!-- listas -->
+
+                    <!-- exemplo de lista terminada -->
                     <div class="todo done">
                         <h3>Fazendo algo</h3>
                         <!-- local aonde irá a prioridade-->
