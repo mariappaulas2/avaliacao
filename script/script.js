@@ -1,5 +1,6 @@
 const form = document.querySelector('.form');
 const formInput = document.querySelector('#formInput');
+const prioridade = document.querySelector('#select-prioridade');
 const lista = document.querySelector('.lista-todo');
 const editForm = document.querySelector('.editForm');
 const editInput = document.querySelector('#editInput');
@@ -21,6 +22,22 @@ const saveTodo = (text, done = 0, save = 1) => {
     const todo = document.createElement('div');
     todo.classList.add('todo');
     
+    //cria a bolinha de prioridade
+    const todoPrioridade = document.createElement('div');
+    todoPrioridade.classList.add('prioridade');
+    todoPrioridade.innerHTML = '<i class="bx bxs-circle"></i>';
+
+        //determina a cor da bolinha de acordo com a prioridade
+        if (prioridade.value === 'urgente-op') {
+            todoPrioridade.classList.add('urgente-op'); // vermelho
+        } else if (prioridade.value === 'normal-op') {
+            todoPrioridade.classList.add('normal-op'); // amarelo
+        } else if (prioridade.value === 'baixa-op') {
+            todoPrioridade.classList.add('baixa-op'); // verde
+        }
+    
+    todo.appendChild(todoPrioridade);
+
     //cria o título do todo
     const todoTitle = document.createElement('h3');
     todoTitle.innerText = text;
@@ -56,7 +73,7 @@ const saveTodo = (text, done = 0, save = 1) => {
 
     //salva no local storage
     if (save) {
-        saveTodoLocalStorage({text, done: 0});
+        saveTodoLocalStorage({text, done: 0, });
     }
 
     // salva tudo isso dentro da div lista
@@ -73,7 +90,8 @@ const toggleForms = () => {
     lista.classList.toggle("hide");
 };
 
-const updateTodo = (text) => {
+// editar tarefa
+const updateTodo = (text, novaPrioriade) => {
     const todos = document.querySelectorAll(".todo");
     
     todos.forEach(todo => {
@@ -82,7 +100,21 @@ const updateTodo = (text) => {
         if(todoTitle.innerText === oldInputValue) {
             todoTitle.innerText = text;
 
-            updateTodoLocalStorage(oldInputValue, text);
+            // atualiza a cor da bolinha de prioridade
+            const todoPrioridade = todo.querySelector(".prioridade");
+
+
+            todoPrioridade.classList.remove("urgente-op", "normal-op", "baixa-op");
+
+            if (novaPrioriade === 'urgente-op') {
+                todoPrioridade.classList.add('urgente-op'); // vermelho
+            } else if (novaPrioriade === 'normal-op') {
+                todoPrioridade.classList.add('normal-op'); // amarelo
+            } else if (novaPrioriade === 'baixa-op') {
+                todoPrioridade.classList.add('baixa-op'); // verde
+            }
+
+            updateTodoLocalStorage(oldInputValue, {text, prioridade: novaPrioriade});
         }
     });
 };
@@ -91,7 +123,7 @@ const getSearchedTodos = (search) => {
     const todos = document.querySelectorAll(".todo");
 
     todos.forEach((todo) => {
-        const todoTitle = tudo.querySelector("h3").innerText.toLowerCase();
+        const todoTitle = todo.querySelector("h3").innerText.toLowerCase();
 
         todo.style.display = "flex";
 
@@ -104,33 +136,48 @@ const getSearchedTodos = (search) => {
 const filterTodos = (filterValue) => {
     const todos = document.querySelectorAll(".todo");
 
-    switch(filterValue) {
-        case "all":
-            todos.forEach((todo) => (todo.style.display = "flex"));
-
-            break;
-            
-        case "done":
-            todos.forEach((todo) =>
-                todo.classList.contains("done")
-                 ? (todo.style.display = "flex")
-                  : (todo.style.display = "none")
-            );
-
-            break;
+    todos.forEach((todo) => {
+        const prioridades = todo.querySelector(".prioridade");
         
-        case "todo":
-            todos.forEach((todo) =>
-                !todo.classList.contains("done")
-                    ? (todo.style.display = "flex")
-                    : (todo.style.display = "none")
-            );
+        switch(filterValue) {
+            case "tudo-op":
+                (todo.style.display = "flex");
 
-            break;
+                break;
+                
+            case "done-op":
+                todo.classList.contains("done")
+                    ? (todo.style.display = "flex")
+                    : (todo.style.display = "none");
+
+                break;
             
-        default:
-            break;
-    }
+            case "urgente-op":
+                prioridades && prioridades.classList.contains("urgente-op")
+                    ? (todo.style.display = "flex")
+                    : (todo.style.display = "none");
+                
+
+                break;
+            
+            case "normal-op":
+                prioridades && prioridades.classList.contains("normal-op")
+                    ? (todo.style.display = "flex")
+                    : (todo.style.display = "none");
+
+                break;
+            
+            case "baixa-op":
+                prioridades && prioridades.classList.contains("baixa-op")
+                    ? (todo.style.display = "flex")
+                    : (todo.style.display = "none");
+
+                break;
+                
+            default:
+                break;
+        }
+    });
 };
 
 
@@ -189,9 +236,11 @@ editForm.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
     const editInputValue = editInput.value;
-    
+    const novaPrioriade = document.querySelector('#edit-prioridade').value;
+
+
     if(editInputValue) {
-        updateTodo(editInputValue);
+        updateTodo(editInputValue, novaPrioriade);
     }
 
     toggleForms()
@@ -264,7 +313,9 @@ const updateTodoLocalStorage = (todoOldText, todoNewText) => {
     const todos = getTodosLocalStorage();
 
     todos.map((todo) =>
-        todo.text === todoOldText ? (todo.text = todoNewText) : null
+        todo.text === todoOldText
+        ? (todo.text = todoNewText.text, todo.prioridade = todoNewText.prioridade)
+        : null
     );
 
     localStorage.setItem("todos", JSON.stringify(todos));

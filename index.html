@@ -38,7 +38,7 @@
                     <form id = "editForm">
                         <input type="text" id="editInput" name="edit">
                         
-                        <select id="select-prioridade">
+                        <select id="edit-prioridade">
                             <option value="urgente-op">Urgente</option>
                             <option value="normal-op">Normal</option>
                             <option value="baixa-op">Baixa</option>
@@ -70,56 +70,17 @@
                         <h4>Filtrar</h4>
                         <!-- select das opções de prioridade  -->
                         <select id="filtrar-prioridade">
+                            <option value="tudo-op">Todas</option>
                             <option value="urgente-op">Urgente</option>
                             <option value="normal-op">Normal</option>
                             <option value="baixa-op">Baixa</option>
-                            <option value="done-op">Prontos</option>
+                            <option value="done-op">Prontas</option>
                         </select>
                     </div>
                 </div>
                 <!-- itens -->
-                <div class="lista-todo">
-                    <!-- exemplo de lista, apagar depois -->
-                    <div class="todo">
-                        <h3>Fazendo algo</h3>
-
-                        <!-- local aonde irá a prioridade-->
-                        <div class="prioridade"></div>
-                        <!-- botões  -->
-                        <div class="botoes">
-                            <button class="finish-todo">
-                                <i class='bx bx-check'></i>
-                            </button>
-                            <button class="edit-todo">
-                                <i class='bx bxs-pencil'></i>
-                            </button>
-                            <button class="delete-todo">
-                                <i class='bx bxs-trash-alt' ></i>
-                            </button>
-                        </div>
-                        
-                    </div>
-
-                    <!-- exemplo de lista terminada -->
-                    <div class="todo done">
-                        <h3>Algo feito</h3>
-                        <!-- local aonde irá a prioridade-->
-                        <div class="prioridade"></div>
-                        <!-- botões -->
-                        <div class="botoes">
-                            <button class="finish-todo">
-                                <i class='bx bx-check'></i>
-                            </button>
-                            <button class="edit-todo">
-                                <i class='bx bxs-pencil'></i>
-                            </button>
-                            <button class="delete-todo">
-
-                                <i class='bx bxs-trash-alt' ></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
+                <div class="lista-todo">     
+                    <!-- listas sao adicionadas pelo js-->
             </div>
         </div>
 

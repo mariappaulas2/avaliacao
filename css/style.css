@@ -137,10 +137,25 @@ body
     border: 1px solid #423a66;
 }
 
+.urgente-op
+{
+    color: hsl(0, 100%, 50%);
+}
+
+.normal-op
+{
+    color: hsl(61, 100%, 50%);
+}
+
+.baixa-op
+{
+    color: hsl(115, 100%, 50%);
+}
+
 .done
 {
     background: #242633;
-    
+
     h3 {
         text-decoration: line-through;
     }
@@ -149,6 +164,8 @@ body
 .botoes
 {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 10px;
     
 }
