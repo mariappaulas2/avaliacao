@@ -47,7 +47,7 @@ body
     display: none;
 }
 
-#storage, #editStorage
+#form, #editForm
 {
     display: flex;
     flex-direction: row;
@@ -56,7 +56,7 @@ body
     justify-content: center;
 }
 
-#storageInput, #editInput
+#formInput, #editInput
 {
     width: 68%;
     height: 25px;
@@ -140,11 +140,10 @@ body
 .done
 {
     background: #242633;
-}
-
-.done h3
-{
-    text-decoration: line-through;
+    
+    h3 {
+        text-decoration: line-through;
+    }
 }
 
 .botoes
