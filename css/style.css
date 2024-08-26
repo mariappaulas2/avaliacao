@@ -12,6 +12,11 @@ body
     background: rgb(36,15,128);
     background: radial-gradient(circle, rgba(36,15,128,1) 0%, rgba(7,1,15,1) 62%);
 }
+.card
+{
+    background-color: #d3cbf5;
+    color: #37284d;
+}
 
 .container
 {
@@ -26,10 +31,9 @@ body
 {
     background-color: #ffffff;
     border-radius: 10px;
-    width: 30%;
+    width: 60%;
     margin: 20px auto;
     padding: 20px;
-    
 }
 .formularioPT1
 {
@@ -154,7 +158,8 @@ body
 
 .done
 {
-    background: #242633;
+    background-color: #392e69;
+    color: #d3cbf5;
 
     h3 {
         text-decoration: line-through;

@@ -50,19 +50,19 @@ const saveCard = (text, done = 0, save = 1) => {
     
     // cria o botão para marcar como concluído
     const finishcard = document.createElement('button');
-    finishcard.classList.add('finish-todo');
+    finishcard.classList.add('btn-success');
     finishcard.innerHTML = '<i class="bx bx-check"></i>';
     cardButtons.appendChild(finishcard);
     
     // cria o botão para editar a tarefa
     const editcard = document.createElement('button');
-    editcard.classList.add('edit-todo')	;
+    editcard.classList.add('btn-warning')	;
     editcard.innerHTML = '<i class="bx bxs-pencil"></i>';
     cardButtons.appendChild(editcard);
     
     // cria o botão para deletar a tarefa
     const deleteCard = document.createElement('button');
-    deleteCard.classList.add('delete-todo');
+    deleteCard.classList.add('btn-danger');
     deleteCard.innerHTML = '<i class="bx bxs-trash-alt"></i>';
     cardButtons.appendChild(deleteCard);
 
@@ -205,20 +205,20 @@ document.addEventListener("click", (evento) => {
         cardTitle = parentEl.querySelector("h3").innerText || "";
     }
     
-    if(targetEl.classList.contains("finish-todo")) {
+    if(targetEl.classList.contains("btn-success")) {
         parentEl.classList.toggle("done");
 
         updatealecrimtatusLocalStorage(cardTitle);
     }
     
-    if(targetEl.classList.contains("edit-todo")) {
+    if(targetEl.classList.contains("btn-warning")) {
         toggleForms();
         
         editInput.value = cardTitle;
         oldInputValue = cardTitle;
     }
     
-    if(targetEl.classList.contains("delete-todo")) {
+    if(targetEl.classList.contains("")) {
         parentEl.remove();
 
         removeCardLocalStorage(cardTitle);
