@@ -22,7 +22,7 @@ body
     color: #242633;
 }
 
-.card
+.cardPrincipal
 {
     background-color: #ffffff;
     border-radius: 10px;
@@ -121,7 +121,7 @@ body
     border: 1px solid #423a66;
 }
 
-.todo
+/* .todo
 {
     color: #fff;
     cursor: pointer;
@@ -135,7 +135,7 @@ body
     padding: 5px;
     padding-left: 15px;
     border: 1px solid #423a66;
-}
+} */
 
 .urgente-op
 {
