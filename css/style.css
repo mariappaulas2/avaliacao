@@ -12,6 +12,13 @@ body
     background: rgb(36,15,128);
     background: radial-gradient(circle, rgba(36,15,128,1) 0%, rgba(7,1,15,1) 62%);
 }
+.card
+{
+    background-color: #d3cbf5;
+    color: #37284d;
+    margin: 10px;
+    padding: 10px;
+}
 
 .container
 {
@@ -22,14 +29,13 @@ body
     color: #242633;
 }
 
-.card
+.cardPrincipal
 {
     background-color: #ffffff;
     border-radius: 10px;
-    width: 30%;
+    width: 60%;
     margin: 20px auto;
     padding: 20px;
-    
 }
 .formularioPT1
 {
@@ -121,7 +127,7 @@ body
     border: 1px solid #423a66;
 }
 
-.todo
+/* .todo
 {
     color: #fff;
     cursor: pointer;
@@ -135,7 +141,7 @@ body
     padding: 5px;
     padding-left: 15px;
     border: 1px solid #423a66;
-}
+} */
 
 .urgente-op
 {
@@ -154,7 +160,10 @@ body
 
 .done
 {
-    background: #242633;
+    background-color: #392e69;
+    color: #d3cbf5;
+    margin: 10px;
+    padding: 10px;
 
     h3 {
         text-decoration: line-through;

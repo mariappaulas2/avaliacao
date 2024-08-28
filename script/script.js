@@ -11,73 +11,71 @@ const filterBtn = document.querySelector("#filtrar-prioridade");
 
 let oldInputValue;
 
-
-
 //funções
 
 //salvar tarefa
-const saveTodo = (text, done = 0, save = 1) => {
+const saveCard = (text, done = 0, save = 1) => {
 
     //cria a div todo
-    const todo = document.createElement('div');
-    todo.classList.add('todo');
+    const card = document.createElement('div');
+    card.classList.add('card');
     
     //cria a bolinha de prioridade
-    const todoPrioridade = document.createElement('div');
-    todoPrioridade.classList.add('prioridade');
-    todoPrioridade.innerHTML = '<i class="bx bxs-circle"></i>';
+    const cardPrioridade = document.createElement('div');
+    cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i>';
+    cardPrioridade.classList.add('prioridade');
 
         //determina a cor da bolinha de acordo com a prioridade
         if (prioridade.value === 'urgente-op') {
-            todoPrioridade.classList.add('urgente-op'); // vermelho
+            cardPrioridade.classList.add('urgente-op'); // vermelho
         } else if (prioridade.value === 'normal-op') {
-            todoPrioridade.classList.add('normal-op'); // amarelo
+            cardPrioridade.classList.add('normal-op'); // amarelo
         } else if (prioridade.value === 'baixa-op') {
-            todoPrioridade.classList.add('baixa-op'); // verde
+            cardPrioridade.classList.add('baixa-op'); // verde
         }
     
-    todo.appendChild(todoPrioridade);
+    card.appendChild(cardPrioridade);
 
     //cria o título do todo
-    const todoTitle = document.createElement('h3');
-    todoTitle.innerText = text;
-    todo.appendChild(todoTitle);
-    
+    const cardTitle = document.createElement('h3');
+    cardTitle.innerText = text;
+    card.appendChild(cardTitle);
+
     // cria a div dos botoes
-    const todoButtons = document.createElement('div');
-    todoButtons.classList.add('botoes');
-    todo.appendChild(todoButtons);
+    const cardButtons = document.createElement('div');
+    cardButtons.classList.add('botoes');
+    card.appendChild(cardButtons);
     
     // cria o botão para marcar como concluído
-    const finishTodo = document.createElement('button');
-    finishTodo.classList.add('finish-todo');
-    finishTodo.innerHTML = '<i class="bx bx-check"></i>';
-    todoButtons.appendChild(finishTodo);
+    const finishcard = document.createElement('button');
+    finishcard.classList.add('btn-success');
+    finishcard.innerHTML = '<i class="bx bx-check"></i>';
+    cardButtons.appendChild(finishcard);
     
     // cria o botão para editar a tarefa
-    const editTodo = document.createElement('button');
-    editTodo.classList.add('edit-todo')	;
-    editTodo.innerHTML = '<i class="bx bxs-pencil"></i>';
-    todoButtons.appendChild(editTodo);
+    const editcard = document.createElement('button');
+    editcard.classList.add('btn-warning')	;
+    editcard.innerHTML = '<i class="bx bxs-pencil"></i>';
+    cardButtons.appendChild(editcard);
     
     // cria o botão para deletar a tarefa
-    const deleteTodo = document.createElement('button');
-    deleteTodo.classList.add('delete-todo');
-    deleteTodo.innerHTML = '<i class="bx bxs-trash-alt"></i>';
-    todoButtons.appendChild(deleteTodo);
-    
+    const deleteCard = document.createElement('button');
+    deleteCard.classList.add('btn-danger');
+    deleteCard.innerHTML = '<i class="bx bxs-trash-alt"></i>';
+    cardButtons.appendChild(deleteCard);
+
     // adiciona a classe
     if (done) {
-        todo.classList.add('done');
+        card.classList.add('done');
     }
 
     //salva no local storage
     if (save) {
-        saveTodoLocalStorage({text, done: 0, });
+        saveCardLocalStorage({text, done: 0, });
     }
 
     // salva tudo isso dentro da div lista
-    lista.appendChild(todo);
+    lista.appendChild(card);
 
     // limpa o input, para criar outra tarefa
     formInput.value = "";
@@ -89,88 +87,87 @@ const toggleForms = () => {
     form.classList.toggle("hide");
     lista.classList.toggle("hide");
 };
-
+//.card
 // editar tarefa
-const updateTodo = (text, novaPrioriade) => {
-    const todos = document.querySelectorAll(".todo");
+const updateCard = (text, novaPrioriade) => {
+    const Tarefas = document.querySelectorAll(".card");
     
-    todos.forEach(todo => {
-        let todoTitle = todo.querySelector("h3")
+    Tarefas.forEach(card => {
+        let cardTitle = card.querySelector("h3")
         
-        if(todoTitle.innerText === oldInputValue) {
-            todoTitle.innerText = text;
+        if(cardTitle.innerText === oldInputValue) {
+            cardTitle.innerText = text;
 
             // atualiza a cor da bolinha de prioridade
-            const todoPrioridade = todo.querySelector(".prioridade");
+            const cardPrioridade = card.querySelector(".prioridade");
 
 
-            todoPrioridade.classList.remove("urgente-op", "normal-op", "baixa-op");
+            cardPrioridade.classList.remove("urgente-op", "normal-op", "baixa-op");
 
             if (novaPrioriade === 'urgente-op') {
-                todoPrioridade.classList.add('urgente-op'); // vermelho
+                cardPrioridade.classList.add('urgente-op'); // vermelho
             } else if (novaPrioriade === 'normal-op') {
-                todoPrioridade.classList.add('normal-op'); // amarelo
+                cardPrioridade.classList.add('normal-op'); // amarelo
             } else if (novaPrioriade === 'baixa-op') {
-                todoPrioridade.classList.add('baixa-op'); // verde
+                cardPrioridade.classList.add('baixa-op'); // verde
             }
 
-            updateTodoLocalStorage(oldInputValue, {text, prioridade: novaPrioriade});
+            updateCardLocalStorage(oldInputValue, {text, prioridade: novaPrioriade});
         }
     });
 };
 
-const getSearchedTodos = (search) => {
-    const todos = document.querySelectorAll(".todo");
+const getSearchedTarefas = (search) => {
+    const Tarefas = document.querySelectorAll(".card")
+    Tarefas.forEach((card) => {
+        const cardTitle = card.querySelector("h3").innerText.toLowerCase();
 
-    todos.forEach((todo) => {
-        const todoTitle = todo.querySelector("h3").innerText.toLowerCase();
+        card.style.display = "flex";
 
-        todo.style.display = "flex";
-
-        if (!todoTitle.includes(search)) {
-            todo.style.display = "none";
+        if (!cardTitle.includes(search)) {
+            card.style.display = "none";
         }
     });
 };
 
-const filterTodos = (filterValue) => {
-    const todos = document.querySelectorAll(".todo");
+const filterTarefas = (filterValue) => {
+    const Tarefas = document.querySelectorAll(".card");
 
-    todos.forEach((todo) => {
-        const prioridades = todo.querySelector(".prioridade");
+    Tarefas.forEach((card) => {
+        const prioridades = card.querySelector(".prioridade");
         
         switch(filterValue) {
             case "tudo-op":
-                (todo.style.display = "flex");
+                (card.style.display = "flex");
 
                 break;
                 
             case "done-op":
-                todo.classList.contains("done")
-                    ? (todo.style.display = "flex")
-                    : (todo.style.display = "none");
+                card.classList.contains("done")
+                    ? (card.style.display = "flex")
+                    : (card.style.display = "none");
 
                 break;
             
             case "urgente-op":
                 prioridades && prioridades.classList.contains("urgente-op")
-                    ? (todo.style.display = "flex")
-                    : (todo.style.display = "none");
+                    ? (card.style.display = "flex")
+                    : (card.style.display = "none");
                 
 
                 break;
             
             case "normal-op":
                 prioridades && prioridades.classList.contains("normal-op")
-                    ? (todo.style.display = "flex")
-                    : (todo.style.display = "none");
+                    ? (card.style.display = "flex")
+                    : (card.style.display = "none");
 
                 break;
             
             case "baixa-op":
                 prioridades && prioridades.classList.contains("baixa-op")
-                    ? (todo.style.display = "flex")
-                    : (todo.style.display = "none");
+                    ? (card.style.display = "flex")
+                    : (card.style.display = "none");
 
                 break;
                 
@@ -191,7 +188,7 @@ form.addEventListener("submit", (event) => {
     const inputValue = formInput.value;
 
     if(inputValue) {
-        saveTodo(inputValue)
+        saveCard(inputValue)
     }
 });
 
@@ -199,30 +196,30 @@ form.addEventListener("submit", (event) => {
 document.addEventListener("click", (evento) => {
     
     const targetEl = evento.target;
-    const parentEl = targetEl.closest(".todo");
-    let todoTitle;
+    const parentEl = targetEl.closest(".card");
+    let cardTitle;
     
     if(parentEl && parentEl.querySelector("h3")) {
-        todoTitle = parentEl.querySelector("h3").innerText || "";
+        cardTitle = parentEl.querySelector("h3").innerText || "";
     }
     
-    if(targetEl.classList.contains("finish-todo")) {
+    if(targetEl.classList.contains("btn-success")) {
         parentEl.classList.toggle("done");
 
-        updateTodoStatusLocalStorage(todoTitle);
+        updateTarefastatusLocalStorage(cardTitle);
     }
     
-    if(targetEl.classList.contains("edit-todo")) {
+    if(targetEl.classList.contains("btn-warning")) {
         toggleForms();
         
-        editInput.value = todoTitle;
-        oldInputValue = todoTitle;
+        editInput.value = cardTitle;
+        oldInputValue = cardTitle;
     }
     
-    if(targetEl.classList.contains("delete-todo")) {
+    if(targetEl.classList.contains("btn-danger")) {
         parentEl.remove();
 
-        removeTodoLocalStorage(todoTitle);
+        removeCardLocalStorage(cardTitle);
     }
 });
 
@@ -240,7 +237,7 @@ editForm.addEventListener("submit", (evento) => {
 
 
     if(editInputValue) {
-        updateTodo(editInputValue, novaPrioriade);
+        updateCard(editInputValue, novaPrioriade);
     }
 
     toggleForms()
@@ -249,7 +246,7 @@ editForm.addEventListener("submit", (evento) => {
 searchInput.addEventListener("keyup", (evento) => {
     const search = evento.target.value;
     
-    getSearchedTodos(search);
+    getSearchedTarefas(search);
 });
 
 deleteBtn.addEventListener("click", (evento) => {
@@ -263,62 +260,61 @@ deleteBtn.addEventListener("click", (evento) => {
 filterBtn.addEventListener("change", (evento) => {
     const filterValue = evento.target.value;
     
-    filterTodos(filterValue);
+    filterTarefas(filterValue);
 });
 
 
 
 //O tal do local storage
-const getTodosLocalStorage = () => {
-    const todos = JSON.parse(localStorage.getItem("todos")) || [];
+const getTarefasLocalStorage = () => {
+    const Tarefas = JSON.parse(localStorage.getItem("Tarefas")) || [];
 
-    return todos;
+    return Tarefas;
 };
 
-const loadTodos = () => {
-    const todos = getTodosLocalStorage();
+const loadTarefas = () => {
+    const Tarefas = getTarefasLocalStorage();
 
-    todos.forEach((todo) => {
-        saveTodo(todo.text, todo.done, 0);
-    });
+    Tarefas.forEach((card) => {
+        saveCard(card.text, card.done, 0);card });
 };
 
-const saveTodoLocalStorage = (todo) => {
-    const todos = getTodosLocalStorage();
+const saveCardLocalStorage = (card) => {
+    const Tarefas = getTarefasLocalStorage();
 
-    todos.push(todo);
+    Tarefas.push(card);
 
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
-const removeTodoLocalStorage = (todoText) => {
-    const todos = getTodosLocalStorage();
+const removeCardLocalStorage = (cardText) => {
+    const Tarefas = getTarefasLocalStorage();
 
-    const filterTodos = todos.filter((todo) => todo.text != todoText);
+    const filterTarefas = Tarefas.filter((card) => card.text != cardText);
 
-    localStorage.setItem("todos", JSON.stringify(filterTodos));
+    localStorage.setItem("Tarefas", JSON.stringify(filterTarefas));
 };
 
-const updateTodoStatusLocalStorage = (todoText) => {
-    const todos = getTodosLocalStorage();
+const updateTarefastatusLocalStorage = (cardText) => {
+    const Tarefas = getTarefasLocalStorage();
 
-    todos.map((todo) =>
-    todo.text === todoText ? (todo.done = !todo.done) : null
+    Tarefas.map((card) =>
+    card.text === cardText ? (card.done = !card.done) : null
 );
 
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
-const updateTodoLocalStorage = (todoOldText, todoNewText) => {
-    const todos = getTodosLocalStorage();
+const updateCardLocalStorage = (cardOldText, cardNewText) => {
+    const Tarefas = getTarefasLocalStorage();
 
-    todos.map((todo) =>
-        todo.text === todoOldText
-        ? (todo.text = todoNewText.text, todo.prioridade = todoNewText.prioridade)
+    Tarefas.map((card) =>
+        card.text === cardOldText
+        ? (card.text = cardNewText.text, card.prioridade = cardNewText.prioridade)
         : null
     );
 
-    localStorage.setItem("todos", JSON.stringify(todos));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
-loadTodos();
+loadTarefas();
