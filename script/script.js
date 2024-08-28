@@ -11,8 +11,6 @@ const filterBtn = document.querySelector("#filtrar-prioridade");
 
 let oldInputValue;
 
-
-
 //funções
 
 //salvar tarefa
@@ -92,9 +90,9 @@ const toggleForms = () => {
 //.card
 // editar tarefa
 const updateCard = (text, novaPrioriade) => {
-    const alecrim = document.querySelectorAll(".card");
+    const Tarefas = document.querySelectorAll(".card");
     
-    alecrim.forEach(card => {
+    Tarefas.forEach(card => {
         let cardTitle = card.querySelector("h3")
         
         if(cardTitle.innerText === oldInputValue) {
@@ -119,9 +117,9 @@ const updateCard = (text, novaPrioriade) => {
     });
 };
 
-const getSearchedalecrim = (search) => {
-    const alecrim = document.querySelectorAll(".card")
-    alecrim.forEach((card) => {
+const getSearchedTarefas = (search) => {
+    const Tarefas = document.querySelectorAll(".card")
+    Tarefas.forEach((card) => {
         const cardTitle = card.querySelector("h3").innerText.toLowerCase();
 
         card.style.display = "flex";
@@ -132,10 +130,10 @@ const getSearchedalecrim = (search) => {
     });
 };
 
-const filteralecrim = (filterValue) => {
-    const alecrim = document.querySelectorAll(".card");
+const filterTarefas = (filterValue) => {
+    const Tarefas = document.querySelectorAll(".card");
 
-    alecrim.forEach((card) => {
+    Tarefas.forEach((card) => {
         const prioridades = card.querySelector(".prioridade");
         
         switch(filterValue) {
@@ -208,7 +206,7 @@ document.addEventListener("click", (evento) => {
     if(targetEl.classList.contains("btn-success")) {
         parentEl.classList.toggle("done");
 
-        updatealecrimtatusLocalStorage(cardTitle);
+        updateTarefastatusLocalStorage(cardTitle);
     }
     
     if(targetEl.classList.contains("btn-warning")) {
@@ -218,7 +216,7 @@ document.addEventListener("click", (evento) => {
         oldInputValue = cardTitle;
     }
     
-    if(targetEl.classList.contains("")) {
+    if(targetEl.classList.contains("btn-danger")) {
         parentEl.remove();
 
         removeCardLocalStorage(cardTitle);
@@ -248,7 +246,7 @@ editForm.addEventListener("submit", (evento) => {
 searchInput.addEventListener("keyup", (evento) => {
     const search = evento.target.value;
     
-    getSearchedalecrim(search);
+    getSearchedTarefas(search);
 });
 
 deleteBtn.addEventListener("click", (evento) => {
@@ -262,61 +260,61 @@ deleteBtn.addEventListener("click", (evento) => {
 filterBtn.addEventListener("change", (evento) => {
     const filterValue = evento.target.value;
     
-    filteralecrim(filterValue);
+    filterTarefas(filterValue);
 });
 
 
 
 //O tal do local storage
-const getalecrimLocalStorage = () => {
-    const alecrim = JSON.parse(localStorage.getItem("alecrim")) || [];
+const getTarefasLocalStorage = () => {
+    const Tarefas = JSON.parse(localStorage.getItem("Tarefas")) || [];
 
-    return alecrim;
+    return Tarefas;
 };
 
-const loadalecrim = () => {
-    const alecrim = getalecrimLocalStorage();
+const loadTarefas = () => {
+    const Tarefas = getTarefasLocalStorage();
 
-    alecrim.forEach((card) => {
+    Tarefas.forEach((card) => {
         saveCard(card.text, card.done, 0);card });
 };
 
 const saveCardLocalStorage = (card) => {
-    const alecrim = getalecrimLocalStorage();
+    const Tarefas = getTarefasLocalStorage();
 
-    alecrim.push(card);
+    Tarefas.push(card);
 
-    localStorage.setItem("alecrim", JSON.stringify(alecrim));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
 const removeCardLocalStorage = (cardText) => {
-    const alecrim = getalecrimLocalStorage();
+    const Tarefas = getTarefasLocalStorage();
 
-    const filteralecrim = alecrim.filter((card) => card.text != cardText);
+    const filterTarefas = Tarefas.filter((card) => card.text != cardText);
 
-    localStorage.setItem("alecrim", JSON.stringify(filteralecrim));
+    localStorage.setItem("Tarefas", JSON.stringify(filterTarefas));
 };
 
-const updatealecrimtatusLocalStorage = (cardText) => {
-    const alecrim = getalecrimLocalStorage();
+const updateTarefastatusLocalStorage = (cardText) => {
+    const Tarefas = getTarefasLocalStorage();
 
-    alecrim.map((card) =>
+    Tarefas.map((card) =>
     card.text === cardText ? (card.done = !card.done) : null
 );
 
-    localStorage.setItem("alecrim", JSON.stringify(alecrim));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
 const updateCardLocalStorage = (cardOldText, cardNewText) => {
-    const alecrim = getalecrimLocalStorage();
+    const Tarefas = getTarefasLocalStorage();
 
-    alecrim.map((card) =>
+    Tarefas.map((card) =>
         card.text === cardOldText
         ? (card.text = cardNewText.text, card.prioridade = cardNewText.prioridade)
         : null
     );
 
-    localStorage.setItem("alecrim", JSON.stringify(alecrim));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
 };
 
-loadalecrim();
+loadTarefas();
