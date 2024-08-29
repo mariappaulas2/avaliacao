@@ -14,7 +14,18 @@ let oldInputValue;
 //funções
 
 //salvar tarefa
-const saveCard = (text, done = 0, save = 1) => {
+const saveCard = (text, prioridadeValue = null, done = 0, save = 1) => {
+
+    // Verifica se o elemento existe antes de tentar acessar o valor
+    if (!prioridade && !prioridadeValue) {
+        console.error("Elemento de seleção de prioridade não encontrado!");
+        return; // Sai da função se o elemento não for encontrado
+    }
+
+    // Se a prioridadeValue não foi passada, usa a selecionada no dropdown
+    if (!prioridadeValue) {
+        prioridadeValue = prioridade.value;
+    }
 
     //cria a div CARD
     const card = document.createElement('div');
@@ -25,15 +36,15 @@ const saveCard = (text, done = 0, save = 1) => {
     cardPrioridade.classList.add('prioridade');
     
     //cria a cor da bolinha e texto de acordo com a prioridade
-    if (prioridade.value === 'urgente-op') {
+    if (prioridadeValue === 'urgente-op') {
         cardPrioridade.classList.add('urgente-op');
         cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Urgente</h4>';
 
-        } else if (prioridade.value === 'normal-op') {
+        } else if (prioridadeValue === 'normal-op') {
             cardPrioridade.classList.add('normal-op');
             cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Normal</h4>';
 
-        } else if (prioridade.value === 'baixa-op') {
+        } else if (prioridadeValue === 'baixa-op') {
             cardPrioridade.classList.add('baixa-op');
             cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Baixa</h4>';
         }
@@ -69,14 +80,14 @@ const saveCard = (text, done = 0, save = 1) => {
     deleteCard.innerHTML = '<i class="bx bxs-trash-alt"></i>';
     cardButtons.appendChild(deleteCard);
 
-    // adiciona a classe
+    // adiciona a classe done
     if (done) {
         card.classList.add('done');
     }
 
     //salva no local storage
     if (save) {
-        saveCardLocalStorage({text, done: 0, });
+        saveCardLocalStorage({text,prioridade: prioridadeValue, done });
     }
 
     // salva tudo isso dentro da div lista
@@ -94,7 +105,7 @@ const toggleForms = () => {
 };
 
 // editar tarefa
-const updateCard = (text, novaPrioriade) => {
+const updateCard = (text, novaPrioridade) => {
     const Tarefas = document.querySelectorAll(".card");
     
     Tarefas.forEach(card => {
@@ -110,18 +121,18 @@ const updateCard = (text, novaPrioriade) => {
             cardPrioridade.classList.remove("urgente-op", "normal-op", "baixa-op");
             cardPrioridade.innerHTML = '';
 
-            if (novaPrioriade === 'urgente-op') {
+            if (novaPrioridade === 'urgente-op') {
                 cardPrioridade.classList.add('urgente-op');
                 cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Urgente</h4>'; // vermelho
-            } else if (novaPrioriade === 'normal-op') {
+            } else if (novaPrioridade === 'normal-op') {
                 cardPrioridade.classList.add('normal-op');
                 cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Normal</h4>'; // amarelo
-            } else if (novaPrioriade === 'baixa-op') {
+            } else if (novaPrioridade === 'baixa-op') {
                 cardPrioridade.classList.add('baixa-op');
                 cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Baixa</h4>'; // verde
             }
 
-            updateCardLocalStorage(oldInputValue, {text, prioridade: novaPrioriade});
+            updateCardLocalStorage(oldInputValue, {text, prioridade: novaPrioridade});
         }
     });
 };
@@ -273,11 +284,11 @@ editForm.addEventListener("submit", (evento) => {
     evento.preventDefault();
 
     const editInputValue = editInput.value;
-    const novaPrioriade = document.querySelector('#edit-prioridade').value;
+    const novaPrioridade = document.querySelector('#edit-prioridade').value;
 
 
     if(editInputValue) {
-        updateCard(editInputValue, novaPrioriade);
+        updateCard(editInputValue, novaPrioridade);
     }
 
     toggleForms()
@@ -316,10 +327,13 @@ const getTarefasLocalStorage = () => {
 };
 
 const loadTarefas = () => {
+
+    lista.innerHTML = ''; // Limpa a lista antes de carregar as tarefas, para não duplicar 
+
     const Tarefas = getTarefasLocalStorage();// aqui ele pega as terefas armazenadas
 
     Tarefas.forEach((card) => {
-        saveCard(card.text, card.done)});
+        saveCard(card.text, card.prioridade, card.done, 0)});
         //aqui ele salva no card pegando o texto o bool
 };
 
