@@ -16,7 +16,7 @@ let oldInputValue;
 //salvar tarefa
 const saveCard = (text, prioridadeValue = null, done = 0, save = 1) => {
 
-    // Se a prioridadeValue não foi passada, usa a selecionada no dropdown
+    // Seleciona a prioridade
     if (!prioridadeValue) {
         prioridadeValue = prioridade.value;
     }
