@@ -16,12 +16,6 @@ let oldInputValue;
 //salvar tarefa
 const saveCard = (text, prioridadeValue = null, done = 0, save = 1) => {
 
-    // Verifica se o elemento existe antes de tentar acessar o valor
-    if (!prioridade && !prioridadeValue) {
-        console.error("Elemento de seleção de prioridade não encontrado!");
-        return; // Sai da função se o elemento não for encontrado
-    }
-
     // Se a prioridadeValue não foi passada, usa a selecionada no dropdown
     if (!prioridadeValue) {
         prioridadeValue = prioridade.value;
