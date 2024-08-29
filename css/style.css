@@ -145,17 +145,40 @@ body
 
 .urgente-op
 {
-    color: hsl(0, 100%, 50%);
+    color: #dc3545;
+    background: #ffebed;
+    border: 1px solid #dc3545;
 }
 
 .normal-op
 {
-    color: hsl(61, 100%, 50%);
+    color: #ffc107;
+    background: #fffbee;
+    border: 1px solid #ffc107;
 }
 
 .baixa-op
 {
-    color: hsl(115, 100%, 50%);
+    color: #28a745;
+    background: #f1fff5;
+    border: 1px solid #28a745;
+}
+
+.prioridade
+{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2px;
+    width: max-content;
+    height: 30px;
+    border-radius: 5px;
+    padding: 5px 5px 0px 5px;
+}
+
+.prioridade i
+{
+    padding-bottom: 7px;
 }
 
 .done

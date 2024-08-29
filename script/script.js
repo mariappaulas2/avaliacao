@@ -20,20 +20,25 @@ const saveCard = (text, done = 0, save = 1) => {
     const card = document.createElement('div');
     card.classList.add('card');
     
-    //cria a bolinha de prioridade
+    //cria a div e adiciona a classe
     const cardPrioridade = document.createElement('div');
-    cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i>';
     cardPrioridade.classList.add('prioridade');
+    
+    //cria a cor da bolinha e texto de acordo com a prioridade
+    if (prioridade.value === 'urgente-op') {
+        cardPrioridade.classList.add('urgente-op');
+        cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Urgente</h4>';
 
-        //determina a cor da bolinha de acordo com a prioridade
-        if (prioridade.value === 'urgente-op') {
-            cardPrioridade.classList.add('urgente-op'); // vermelho
         } else if (prioridade.value === 'normal-op') {
-            cardPrioridade.classList.add('normal-op'); // amarelo
+            cardPrioridade.classList.add('normal-op');
+            cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Normal</h4>';
+
         } else if (prioridade.value === 'baixa-op') {
-            cardPrioridade.classList.add('baixa-op'); // verde
+            cardPrioridade.classList.add('baixa-op');
+            cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Baixa</h4>';
         }
     
+    // salva tudo feito até agora 🚩
     card.appendChild(cardPrioridade);
 
     //cria o título do CARD
@@ -103,13 +108,17 @@ const updateCard = (text, novaPrioriade) => {
 
 
             cardPrioridade.classList.remove("urgente-op", "normal-op", "baixa-op");
+            cardPrioridade.innerHTML = '';
 
             if (novaPrioriade === 'urgente-op') {
-                cardPrioridade.classList.add('urgente-op'); // vermelho
+                cardPrioridade.classList.add('urgente-op');
+                cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Urgente</h4>'; // vermelho
             } else if (novaPrioriade === 'normal-op') {
-                cardPrioridade.classList.add('normal-op'); // amarelo
+                cardPrioridade.classList.add('normal-op');
+                cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Normal</h4>'; // amarelo
             } else if (novaPrioriade === 'baixa-op') {
-                cardPrioridade.classList.add('baixa-op'); // verde
+                cardPrioridade.classList.add('baixa-op');
+                cardPrioridade.innerHTML = '<i class="bx bxs-circle"></i><h4>Baixa</h4>'; // verde
             }
 
             updateCardLocalStorage(oldInputValue, {text, prioridade: novaPrioriade});
@@ -117,13 +126,20 @@ const updateCard = (text, novaPrioriade) => {
     });
 };
 
+// a incrivel barra de pesquisas ಠ_ರೃ
 const getSearchedTarefas = (search) => {
+    
+    // seleciona todos as tarefa com a classe .card
     const Tarefas = document.querySelectorAll(".card")
     Tarefas.forEach((card) => {
+
+        // converte o texto para minusculas a fim de facilitar a pesquisa
         const cardTitle = card.querySelector("h3").innerText.toLowerCase();
 
+        // mantém o display flex para continuar visivel
         card.style.display = "flex";
 
+        // se o texto da tarefa não contiver a pesquisa, esconde com display none
         if (!cardTitle.includes(search)) {
             card.style.display = "none";
         }
@@ -145,14 +161,22 @@ const filterTarefas = (filterValue) => {
                 
             case "done-op":
                 card.classList.contains("done")
-                    ? (card.style.display = "flex")//esta sendo exibido 
+
+                    //if card tiver a classe done, mantém o display flex
+                    ? (card.style.display = "flex")//esta sendo exibido
+
+                    // else se não tiver a classe, esconde com display none
                     : (card.style.display = "none");//desapareceu (ㆆ_ㆆ)
 
                 break;
             
             case "urgente-op":
                 prioridades && prioridades.classList.contains("urgente-op")
+
+                    //if card tiver a classe urgente-op, mantém o display flex
                     ? (card.style.display = "flex")
+
+                    // else se não tiver a classe, esconde com display none
                     : (card.style.display = "none");
                 
 
@@ -160,14 +184,22 @@ const filterTarefas = (filterValue) => {
             
             case "normal-op":
                 prioridades && prioridades.classList.contains("normal-op")
+
+                    //if card tiver a classe normal-op, mantém o display flex
                     ? (card.style.display = "flex")
+
+                    // else se não tiver a classe, esconde com display none
                     : (card.style.display = "none");
 
                 break;
             
             case "baixa-op":
                 prioridades && prioridades.classList.contains("baixa-op")
+
+                    //if card tiver a classe baixa-op, mantém o display flex
                     ? (card.style.display = "flex")
+
+                    // else se não tiver a classe, esconde com display none
                     : (card.style.display = "none");
 
                 break;
@@ -327,7 +359,9 @@ const updateCardLocalStorage = (cardOldText, cardNewText) => {
 
     Tarefas.map((card) =>
         card.text === cardOldText
+        //if encontrar
         ? (card.text = cardNewText.text, card.prioridade = cardNewText.prioridade)
+        //else se não encontrar
         : null
     );//Usa map para encontrar a tarefa com o texto cardOldText e, se encontrada, atualiza o texto (text) e a prioridade (prioridade) com os valores de cardNewText
 
