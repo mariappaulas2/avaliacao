@@ -16,7 +16,7 @@ let oldInputValue;
 //salvar tarefa
 const saveCard = (text, done = 0, save = 1) => {
 
-    //cria a div todo
+    //cria a div CARD
     const card = document.createElement('div');
     card.classList.add('card');
     
@@ -36,7 +36,7 @@ const saveCard = (text, done = 0, save = 1) => {
     
     card.appendChild(cardPrioridade);
 
-    //cria o título do todo
+    //cria o título do CARD
     const cardTitle = document.createElement('h3');
     cardTitle.innerText = text;
     card.appendChild(cardTitle);
@@ -87,7 +87,7 @@ const toggleForms = () => {
     form.classList.toggle("hide");
     lista.classList.toggle("hide");
 };
-//.card
+
 // editar tarefa
 const updateCard = (text, novaPrioriade) => {
     const Tarefas = document.querySelectorAll(".card");
@@ -95,7 +95,7 @@ const updateCard = (text, novaPrioriade) => {
     Tarefas.forEach(card => {
         let cardTitle = card.querySelector("h3")
         
-        if(cardTitle.innerText === oldInputValue) {
+        if(cardTitle.innerText === oldInputValue) {// "===" é pra realizar uma comparação de igualdade de tipo e de valor achei que vale a nota pq eu esqueço ¯\_( ͡❛ ͜ʖ ͡❛)_/¯
             cardTitle.innerText = text;
 
             // atualiza a cor da bolinha de prioridade
@@ -130,6 +130,7 @@ const getSearchedTarefas = (search) => {
     });
 };
 
+//galera olha o filtro de tarefas ✍(◔◡◔)
 const filterTarefas = (filterValue) => {
     const Tarefas = document.querySelectorAll(".card");
 
@@ -144,8 +145,8 @@ const filterTarefas = (filterValue) => {
                 
             case "done-op":
                 card.classList.contains("done")
-                    ? (card.style.display = "flex")
-                    : (card.style.display = "none");
+                    ? (card.style.display = "flex")//esta sendo exibido 
+                    : (card.style.display = "none");//desapareceu (ㆆ_ㆆ)
 
                 break;
             
@@ -182,6 +183,7 @@ const filterTarefas = (filterValue) => {
 //eventos
 
 //tirando a função de resetar a pagina depois do enviar
+//só anotando aqui que os eventListener faz com que os botões n precisem de onclick 
 form.addEventListener("submit", (event) => {
     event.preventDefault();
     
@@ -193,6 +195,7 @@ form.addEventListener("submit", (event) => {
 });
 
 //marcar tarefa como concluida
+//mais 1 deles ( ˘︹˘ )
 document.addEventListener("click", (evento) => {
     
     const targetEl = evento.target;
@@ -204,22 +207,26 @@ document.addEventListener("click", (evento) => {
     }
     
     if(targetEl.classList.contains("btn-success")) {
+        // se o botão de success for clicado ele troca o classList para done
         parentEl.classList.toggle("done");
 
         updateTarefastatusLocalStorage(cardTitle);
+        //e arruma no local storage
     }
     
     if(targetEl.classList.contains("btn-warning")) {
         toggleForms();
         
         editInput.value = cardTitle;
-        oldInputValue = cardTitle;
+        oldInputValue = cardTitle; 
+        //o old input só ta aqui com o card pra manter a referencia de antes de alterar
     }
     
     if(targetEl.classList.contains("btn-danger")) {
         parentEl.remove();
 
         removeCardLocalStorage(cardTitle);
+        //removeu do local storage
     }
 });
 
@@ -227,6 +234,7 @@ cancelEdit.addEventListener("click", (evento) => {
     evento.preventDefault();
 
     toggleForms();
+    //faz o cancel cancelar olha que lindo quem diria né
 });
 
 editForm.addEventListener("submit", (evento) => {
@@ -242,19 +250,22 @@ editForm.addEventListener("submit", (evento) => {
 
     toggleForms()
 });
-
+// o search 
+// aqui ele pega o que o usuario digita e procura
 searchInput.addEventListener("keyup", (evento) => {
-    const search = evento.target.value;
+    const search = evento.target.value;// pega o valor digitado
     
-    getSearchedTarefas(search);
+    getSearchedTarefas(search); //procura com get search
 });
-
+// botão de deltar
+//quem imaginaria... mas é bom anotar
 deleteBtn.addEventListener("click", (evento) => {
     evento.preventDefault();
 
     searchInput.value = "";
 
     searchInput.dispatchEvent(new Event("keyup"));
+    // essa parte atualiza a lista de tarefas 
 });
 
 filterBtn.addEventListener("change", (evento) => {
@@ -264,19 +275,20 @@ filterBtn.addEventListener("change", (evento) => {
 });
 
 
-
-//O tal do local storage
+//O tal do local storage (ง︡'-'︠)ง
 const getTarefasLocalStorage = () => {
     const Tarefas = JSON.parse(localStorage.getItem("Tarefas")) || [];
+    //pega as tareas e faz elas serem armazenadas como string json como eu entendi
 
     return Tarefas;
 };
 
 const loadTarefas = () => {
-    const Tarefas = getTarefasLocalStorage();
+    const Tarefas = getTarefasLocalStorage();// aqui ele pega as terefas armazenadas
 
     Tarefas.forEach((card) => {
-        saveCard(card.text, card.done, 0);card });
+        saveCard(card.text, card.done)});
+        //aqui ele salva no card pegando o texto o bool
 };
 
 const saveCardLocalStorage = (card) => {
@@ -285,21 +297,26 @@ const saveCardLocalStorage = (card) => {
     Tarefas.push(card);
 
     localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
+    //aqui ele salva as coisas novas no local storage e transforma em JSON com o stringfy
 };
 
 const removeCardLocalStorage = (cardText) => {
     const Tarefas = getTarefasLocalStorage();
 
     const filterTarefas = Tarefas.filter((card) => card.text != cardText);
+    // Filtra o array de tarefas para remover a tarefa que possui o texto (card.text) correspondente ao cardText fornecido.
 
     localStorage.setItem("Tarefas", JSON.stringify(filterTarefas));
+    //salva atualizado
 };
 
+//pra marcar se ela ta feita ou n
 const updateTarefastatusLocalStorage = (cardText) => {
     const Tarefas = getTarefasLocalStorage();
 
     Tarefas.map((card) =>
     card.text === cardText ? (card.done = !card.done) : null
+    //Usa o método map para ver cada tarefa, se encontrar a tarefa com o texto correspondente a cardText, inverte o valor do status done.
 );
 
     localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
@@ -312,9 +329,13 @@ const updateCardLocalStorage = (cardOldText, cardNewText) => {
         card.text === cardOldText
         ? (card.text = cardNewText.text, card.prioridade = cardNewText.prioridade)
         : null
-    );
+    );//Usa map para encontrar a tarefa com o texto cardOldText e, se encontrada, atualiza o texto (text) e a prioridade (prioridade) com os valores de cardNewText
 
-    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));
+    localStorage.setItem("Tarefas", JSON.stringify(Tarefas));//atualiza
 };
 
-loadTarefas();
+loadTarefas();//exibe as tarefas
+
+//acabou finalmente eu acho (╥﹏╥)
+
+//com isso concluo que deve ser melhor com banco de dados
