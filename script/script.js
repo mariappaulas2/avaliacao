@@ -15,7 +15,11 @@ let oldInputValue;
 
 //salvar tarefa
 const saveCard = (text, prioridadeValue = null, done = 0, save = 1) => {
-    prioridadeValue = prioridade.value;
+
+    // Seleciona a prioridade
+    if (!prioridadeValue) {
+        prioridadeValue = prioridade.value;
+    }
 
     //cria a div CARD
     const card = document.createElement('div');
